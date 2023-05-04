@@ -1,5 +1,5 @@
 # TasksQueuesFreeRTOS
-> Este código tem como objetivo ligar e desligar um led através de um botão e fazer a contagem de quando eke for ligado, usando o FreeRTOS (esp-idf).
+> Este código tem como objetivo ligar e desligar um led através de um botão e fazer a contagem de quando ele for ligado, usando o FreeRTOS (esp-idf).
 
 ## Componentes da Equipe
 <ul style="list-style-type:circle;">
