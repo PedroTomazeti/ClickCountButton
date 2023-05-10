@@ -31,7 +31,7 @@ void vTaskSwitch(void *pvParameters) {
             count = countClick(count);
         }
         last_status = status_switch;
-        vTaskDelay( 275 / portTICK_PERIOD_MS );
+        vTaskDelay( 250 / portTICK_PERIOD_MS );
     }
 }
 
