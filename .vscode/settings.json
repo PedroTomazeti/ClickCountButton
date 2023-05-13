@@ -14,5 +14,21 @@
     "idf.pythonBinPathWin": "C:\\Users\\Jonas\\.espressif\\python_env\\idf4.4_py3.8_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "C:\\Users\\Jonas\\.espressif",
     "idf.flashType": "UART",
-    "idf.portWin": "COM3"
+    "idf.portWin": "COM3",
+    "files.associations": {
+        "*.js": "javascript",
+        "*.jsx": "javascriptreact",
+        "*.xml": "html",
+        "*.svg": "html",
+        "*.html": "html",
+        "django-html": "html",
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/base_templates/**/*.html": "django-html",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+        "*.inc": "c",
+        "control_switch.h": "c",
+        "esp_netif.h": "c",
+        "timers.h": "c"
+    }
 }
