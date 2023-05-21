@@ -12,6 +12,7 @@
 
 #include "..\..\config.h"
 #include "..\control_led\include\control_led.h"
+#include "..\control_mqtt\include\control_mqtt.h"
 
 #include "lwip/err.h"
 #include "lwip/sys.h"
@@ -34,8 +35,7 @@ const int CONNECTED_BIT = BIT0;
 info_led_t info_status_led;
 
 // Wifi event handler
-static esp_err_t event_handler(void *ctx, system_event_t *event)
-{
+static esp_err_t event_handler(void *ctx, system_event_t *event) {
   switch (event->event_id) {
 
     case SYSTEM_EVENT_STA_START:
@@ -44,10 +44,14 @@ static esp_err_t event_handler(void *ctx, system_event_t *event)
 
     case SYSTEM_EVENT_STA_GOT_IP:
       	xEventGroupSetBits(wifi_event_group, CONNECTED_BIT);
+        mqtt_app_start();
       	break;
 
     case SYSTEM_EVENT_STA_DISCONNECTED:
       	xEventGroupClearBits(wifi_event_group, CONNECTED_BIT);
+        printf("[DESCONNECTED] %s!\n", WIFI_SSID);
+        configureLed(PIN_LED_WIFI);
+        gpio_set_level(PIN_LED_WIFI, false);
       	break;
 
     default:
@@ -57,9 +61,7 @@ static esp_err_t event_handler(void *ctx, system_event_t *event)
   return ESP_OK;
 }
 
-// Main task
-void vTaskWifi(void *pvParameter)
-{
+void vTaskWifi(void *pvParameter) {
     tcpip_adapter_ip_info_t ip_info;
 
     // wait for connection
@@ -80,7 +82,7 @@ void vTaskWifi(void *pvParameter)
     printf("[GATEWAY] %s\n", ip4addr_ntoa(&ip_info.gw));
 
     while (1) {
-        vTaskDelay(1000 / portTICK_RATE_MS);
+        vTaskDelay(3000 / portTICK_RATE_MS);
     }
 }
 

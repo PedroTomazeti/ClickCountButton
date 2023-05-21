@@ -29,6 +29,9 @@
         "*.inc": "c",
         "control_switch.h": "c",
         "esp_netif.h": "c",
-        "timers.h": "c"
+        "timers.h": "c",
+        "mqtt_client.h": "c",
+        "esp_err.h": "c",
+        "control_led.h": "c"
     }
 }

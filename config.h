@@ -17,6 +17,14 @@
 #define WIFI_SSID "your wifi ssid"
 #define WIFI_PASS "your wifi pass"
 
+#define MQTT_URI   "mqtt://your mqtt uri"
+#define MQTT_USER  "your user mqtt"
+#define MQTT_PASS  "your pass mqtt"
+
+#define MQTT_CLIID "your client id mqtt"
+
+#define TOPIC1 "your topic"
+
 extern QueueHandle_t xQueueSwitch;
 
 typedef struct {
