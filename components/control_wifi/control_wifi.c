@@ -33,11 +33,6 @@ const int CONNECTED_BIT = BIT0;
 // led
 info_led_t info_status_led;
 
-// void configureLed(int pin_led) {
-//     gpio_reset_pin(pin_led);
-//     gpio_set_direction(pin_led, GPIO_MODE_OUTPUT);
-// }
-
 // Wifi event handler
 static esp_err_t event_handler(void *ctx, system_event_t *event)
 {

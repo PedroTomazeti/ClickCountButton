@@ -15,7 +15,7 @@
 #define PIN_LED_WIFI 18
 
 #define WIFI_SSID "your wifi ssid"
-#define WIFI_PASS "your wifi pass" // In this commit I almost leaked my wifi password xD
+#define WIFI_PASS "your wifi pass"
 
 extern QueueHandle_t xQueueSwitch;
 
