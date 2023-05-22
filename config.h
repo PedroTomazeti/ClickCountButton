@@ -11,8 +11,8 @@
 #define CORE_0 0
 #define CORE_1 1
 #define PIN_SWITCH 19
-#define PIN_LED 2
-#define PIN_LED_WIFI 18
+#define PIN_LED 18
+#define PIN_LED_WIFI 2
 
 #define WIFI_SSID "your wifi ssid"
 #define WIFI_PASS "your wifi pass"
