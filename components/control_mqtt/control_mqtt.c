@@ -23,7 +23,7 @@
 #include "mqtt_client.h"
 #include "..\..\config.h"
 
-static const char *TAG = "MQTT_TEST";
+static const char *TAG = "MQTT_BUTTON01";
 
 uint32_t MQTT_STATUS_CONNECTED = 0;
 
@@ -38,6 +38,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
         MQTT_STATUS_CONNECTED=1;
         
+        // Subscribe in TOPIC1
         msg_id = esp_mqtt_client_subscribe(client, TOPIC1, 0);
         ESP_LOGI(TAG, "sent subscribe successful, msg_id=%d", msg_id);
 

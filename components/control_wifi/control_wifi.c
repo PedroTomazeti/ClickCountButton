@@ -37,7 +37,6 @@ info_led_t info_status_led;
 // Wifi event handler
 static esp_err_t event_handler(void *ctx, system_event_t *event) {
   switch (event->event_id) {
-
     case SYSTEM_EVENT_STA_START:
       	esp_wifi_connect();
       	break;
@@ -81,7 +80,7 @@ void vTaskWifi(void *pvParameter) {
     printf("[MASK]    %s\n", ip4addr_ntoa(&ip_info.netmask));
     printf("[GATEWAY] %s\n", ip4addr_ntoa(&ip_info.gw));
 
-    while (1) {
+    while (true) {
         vTaskDelay(3000 / portTICK_RATE_MS);
     }
 }
