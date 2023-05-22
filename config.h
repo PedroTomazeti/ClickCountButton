@@ -14,18 +14,19 @@
 #define PIN_LED 2
 #define PIN_LED_WIFI 18
 
-#define WIFI_SSID "WEBNET - AP104"
-#define WIFI_PASS "#W3bD3v#"
+#define WIFI_SSID "your wifi ssid"
+#define WIFI_PASS "your wifi pass"
 
-#define MQTT_URI   "mqtt://34.229.145.165:1883"
-#define MQTT_USER  "autohome"
-#define MQTT_PASS  "comida05"
+#define MQTT_URI   "mqtt://your mqtt uri"
+#define MQTT_USER  "your user mqtt"
+#define MQTT_PASS  "your pass mqtt"
 
-#define MQTT_CLIID "grupo1"
+#define MQTT_CLIID "your client id mqtt"
 
-#define TOPIC1 "/engcomp/button/0101"
+#define TOPIC1 "your topic"
 
 extern QueueHandle_t xQueueSwitch;
+extern QueueHandle_t xQueueClicks;
 
 typedef struct {
     int led;
@@ -33,7 +34,7 @@ typedef struct {
 } info_led_t;
 
 typedef struct {
-    int count;
+    int clicks;
 } info_count_t;
 
 extern info_led_t info_led;

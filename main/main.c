@@ -11,6 +11,7 @@
 #include "..\components\control_mqtt\include\control_mqtt.h"
 
 QueueHandle_t xQueueSwitch;
+QueueHandle_t xQueueClicks;
 
 void vTaskSwitch(void *pvParameters);
 void vTaskLed(void *pvParameters);
@@ -20,9 +21,9 @@ void init_app(void);
 void app_main(void) {
     init_app();
 
-    // xTaskCreatePinnedToCore( vTaskSwitch, "TaskSwitch", configMINIMAL_STACK_SIZE + 2048, NULL, 4, NULL, CORE_0 );
+    xTaskCreatePinnedToCore( vTaskSwitch, "TaskSwitch", configMINIMAL_STACK_SIZE + 2048, NULL, 4, NULL, CORE_0 );
     xTaskCreatePinnedToCore( vTaskLed, "TaskLed", configMINIMAL_STACK_SIZE + 2048, NULL, 4, NULL, CORE_0 );
-    xTaskCreatePinnedToCore( vTaskWifi, "TaskWifi", configMINIMAL_STACK_SIZE + 2048, NULL, 6, NULL, CORE_0);
+    xTaskCreatePinnedToCore( vTaskWifi, "TaskWifi", configMINIMAL_STACK_SIZE + 2048, NULL, 6, NULL, CORE_1);
     xTaskCreatePinnedToCore( vTaskPublisher, "TaskPublisher", configMINIMAL_STACK_SIZE + 1024*5, NULL, 2, NULL, CORE_1 );
 }
 
@@ -31,4 +32,5 @@ void init_app(void) {
     ESP_ERROR_CHECK(nvs_flash_init());
     initWifi();
     xQueueSwitch = xQueueCreate( 5, sizeof(info_led) );
+    xQueueClicks = xQueueCreate( 5, sizeof(info_count));
 }

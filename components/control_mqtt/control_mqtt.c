@@ -26,6 +26,7 @@
 static const char *TAG = "MQTT_BUTTON01";
 
 uint32_t MQTT_STATUS_CONNECTED = 0;
+info_count_t info_count_click;
 
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data) {
     ESP_LOGD(TAG, "Event dispatched from event loop base=%s, event_id=%d", base, event_id);
@@ -89,8 +90,14 @@ void mqtt_app_start(void) {
 void vTaskPublisher(void *pvParameter) {
     while (true) {
         if(MQTT_STATUS_CONNECTED) {
-            esp_mqtt_client_publish(client, TOPIC1, "Hello MQTT!", 0, 0, 0);
-            vTaskDelay(1800000 / portTICK_PERIOD_MS);
+            xQueueReceive( xQueueClicks, &info_count_click, portMAX_DELAY);
+
+            int count = info_count_click.clicks;
+            char message[2];
+            sprintf(message, "%d", count);
+
+            esp_mqtt_client_publish(client, TOPIC1, message, 0, 0, 0);
+            vTaskDelay(5000 / portTICK_PERIOD_MS);
         }
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }

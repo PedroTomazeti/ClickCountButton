@@ -32,6 +32,9 @@
         "timers.h": "c",
         "mqtt_client.h": "c",
         "esp_err.h": "c",
-        "control_led.h": "c"
+        "control_led.h": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "algorithm": "c"
     }
 }

@@ -3,9 +3,9 @@
 #include "..\..\..\config.h"
 
 info_led_t info_status_led;
+info_count_t info_count_click;
 
 int countClick(int count);
-int count = 0;
 
 void configureSwitch(int pin_switch) {
     gpio_reset_pin(pin_switch);
@@ -28,17 +28,20 @@ void vTaskSwitch(void *pvParameters) {
             info_status_led.status = status_led;
 
             xQueueSend(xQueueSwitch, &info_status_led, portMAX_DELAY);
-            count = countClick(count);
+            info_count_click.clicks = countClick(info_count_click.clicks);
         }
         last_status = status_switch;
         vTaskDelay( 250 / portTICK_PERIOD_MS );
     }
 }
 
-int countClick (int count){
+int countClick (int click){
     if (info_status_led.status == true) {
-        count++;
-        printf("O LED acendeu %d vez(es).\n", count);
+        click++;
+        printf("O LED acendeu %d vez(es).\n", click);
+
+        info_count_click.clicks = click;
+        xQueueSend( xQueueClicks, &info_count_click, portMAX_DELAY);
     }
-    return count;
+    return click;
 }
