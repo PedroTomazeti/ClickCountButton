@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "control_mqtt.h"
 
-#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
@@ -27,14 +26,15 @@ static const char *TAG = "MQTT_BUTTON01";
 
 uint32_t MQTT_STATUS_CONNECTED = 0;
 info_count_t info_count_click;
+info_led_t info_status_led;
+bool status_led = false;
 
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data) {
     ESP_LOGD(TAG, "Event dispatched from event loop base=%s, event_id=%d", base, event_id);
     esp_mqtt_event_handle_t event = event_data;
     esp_mqtt_client_handle_t client = event->client;
     int msg_id;
-    switch ((esp_mqtt_event_id_t)event_id)
-    {
+    switch ((esp_mqtt_event_id_t)event_id) {
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "MQTT_EVENT_CONNECTED");
         MQTT_STATUS_CONNECTED=1;
@@ -62,6 +62,17 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         ESP_LOGI(TAG, "MQTT_EVENT_DATA");
         printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
         printf("DATA=%.*s\r\n", event->data_len, event->data);
+
+        // a little test
+        // char *msg = "command 1";
+
+        // if ( strncmp(event->data, msg, strlen(msg)) == 0 ) {
+        //     status_led = !status_led;
+        //     info_status_led.led = PIN_LED;
+        //     info_status_led.status = status_led;
+
+        //     xQueueSend(xQueueSwitch, &info_status_led, portMAX_DELAY);
+        // }
         break;
     case MQTT_EVENT_ERROR:
         ESP_LOGI(TAG, "MQTT_EVENT_ERROR");

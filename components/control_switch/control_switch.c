@@ -16,7 +16,7 @@ void vTaskSwitch(void *pvParameters) {
     configureSwitch(PIN_SWITCH);
 
     bool status_led = false;
-    bool last_status = 1;
+    bool last_status = true;
 
     while(true) {
         int status_switch = gpio_get_level(PIN_SWITCH);

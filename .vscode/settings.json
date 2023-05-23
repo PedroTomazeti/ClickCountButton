@@ -35,6 +35,7 @@
         "control_led.h": "c",
         "bitset": "c",
         "chrono": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "functional": "c"
     }
 }
